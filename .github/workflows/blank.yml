@@ -5,23 +5,21 @@ on:
 
 name: Deploy AWS Cloud Formation Template
 
+
+name: "Deploy CloudFormation Stack"
+on: 
+  push:
+    branches:
+    - master
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Load AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-      - name: Deploy App Stack
-        id: deploy
-        uses: alexjurkiewicz/cfn-deploy@v2.0.1
-        with:
-          stackName: sbtcluster
-          templateFile: create-ecs-cluster.json
-          parameters: MinInstances=2 MaxInstances=8 VpcId=${{ secrets.vpc_id }}
-      - name: Print App Hostname
-        run: echo ${{ steps.deploy.outputs.cf_output_AppHostname }}
+    - uses: actions/checkout@v1
+    - uses: mgenteluci/cloudformation-deploy-action@v1.4.0
+      env:
+        AWS_STACK_NAME: 'sbt-stack'
+        AWS_REGION: 'us-east-1'
+        AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
