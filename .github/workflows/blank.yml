@@ -1,11 +1,3 @@
-on:
-  push:
-    branches: 
-      - master
-
-name: Deploy AWS Cloud Formation Template
-
-
 name: "Deploy CloudFormation Stack"
 on: 
   push:
