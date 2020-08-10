@@ -1,3 +1,4 @@
+# Creates an ECS Cluster in AWS via a CLoud Formation Template
 name: "Deploy CloudFormation Stack"
 on: 
   push:
