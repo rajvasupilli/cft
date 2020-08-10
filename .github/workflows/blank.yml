@@ -12,9 +12,9 @@ jobs:
     - uses: actions/checkout@v1
     - uses: intuit/cfn-deploy@master
       env:
-        AWS_REGION: us-east-2
+        AWS_REGION: us-east-1
         STACK_NAME: cfn-deploy
-        TEMPLATE_FILE: ec2.yml
+        TEMPLATE_FILE: create-ecs-cluster.json
         PARAMETERS_FILE: parameter.json
         CAPABLITIES: CAPABILITY_IAM
         AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
