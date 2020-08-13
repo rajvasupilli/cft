@@ -9,13 +9,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: intuit/cfn-deploy@master
-      env:
-        AWS_REGION: us-east-1
-        STACK_NAME: cfn-deploy
-        TEMPLATE_FILE: create-ecs-cluster.json
-        PARAMETERS_FILE: parameter.json
-        CAPABLITIES: CAPABILITY_IAM
-        AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-        AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+      
+    - name: Deploy to AWS CloudFormation
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+        name: SBTStack
+        template: create-ecs-cluster.json
