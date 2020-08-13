@@ -5,9 +5,7 @@
             "Type" : "AWS::EC2::SecurityGroup",
             "Properties" : {
                 "GroupDescription" : "SBTSecurityGroup",
-                "VpcId"            : {
-                    "Ref" : "vpc-0792452e838195c2d"
-                },
+                "VpcId"            : "vpc-0792452e838195c2d",
                 "SecurityGroupIngress" : [
                     {
                         "IpProtocol" : "tcp",
