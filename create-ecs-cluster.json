@@ -6,7 +6,7 @@
             "Properties" : {
                 "GroupDescription" : "SBTSecurityGroup",
                 "VpcId"            : {
-                    "Ref" : "VPC"
+                    "Ref" : "vpc-0792452e838195c2d"
                 },
                 "SecurityGroupIngress" : [
                     {
