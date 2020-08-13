@@ -1,6 +1,22 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Resources": {
+        "SBT-SecurityGroup"                 : {
+            "Type" : "AWS::EC2::SecurityGroup",
+            "Properties" : {
+                "GroupDescription" : "SBTSecurityGroup",
+                "VpcId"            : {
+                    "Ref" : "VPC"
+                },
+                "SecurityGroupIngress" : [
+                    {
+                        "IpProtocol" : "tcp",
+                        "FromPort"   : "9000",
+                        "ToPort"     : "9000"
+                    }
+                ]
+            }
+        },
         "SBTCluster": {
             "Type": "AWS::ECS::Cluster",
             "Properties": {
